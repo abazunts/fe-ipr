@@ -65,12 +65,12 @@ const LoginForm = (props) => {
                     <div>
                         <Field name="email"
                                title={t("login.email")}
-                               errors={errors} touched={touched} t={t}/>
+                               errors={errors} touched={touched}/>
                     </div>
                     <div>
                         <Field name="password"
                                title={t("login.password")}
-                               errors={errors} touched={touched} t={t} type={'password'}/>
+                               errors={errors} touched={touched} type={'password'}/>
                     </div>
                     <div className={classes.buttonSubmit}>
                         <Button title={t("login.loginButton")}/>

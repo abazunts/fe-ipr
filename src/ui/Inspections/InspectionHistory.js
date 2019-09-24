@@ -5,42 +5,53 @@ import {compose} from "redux";
 import {translate} from "react-i18next";
 import {withRouter} from "react-router-dom";
 import InspectionInfo from "./InspectionInfo";
-import Button from "../../elements/Button/button";
 import injectSheet from "react-jss";
+import Button from "../../elements/Button/button";
 
 const styles = {
     addButton: {
         marginBottom: '20px',
         textAlign: 'right',
-    }
+    },
+
 };
 
 const InspectionsHistory = (props) => {
-    const {t, classes} = props;
+    const {t, classes, addNewForm} = props;
     return <div>
         {!props.id ?
             <div>
                 <div className={classes.addButton}>
-                    <Button title={t("inspections.btnNewInspection")}/>
+                    <Button title={t("inspections.btnNewInspection")} onClick={addNewForm}/>
                 </div>
                 <MaterialTable
                     title="Inspections"
                     columns={props.columns}
+                    options={{
+                        headerStyle: {
+                            position: 'sticky',
+                            top: '0',
+                            minHeight: '2em'
+                        }
+                    }}
                     data={props.data}
                     onRowClick={(event, rowData) => {
                         props.history.push(`../inspections/${rowData.id}`);
                     }}
                 />
             </div>
-            : <InspectionInfo id={props.id}/>}
+            : props.id !== 'add' && <InspectionInfo id={props.id}/>}
 
     </div>
 };
 
 const InspectionsHistoryContainer = (props) => {
     const {columnsTable, t} = props;
+    const addNewForm = () => {
+        props.history.push(`../inspections/add`);
+    };
     const columns = Object.keys(columnsTable).map(key => ({title: t('inspections.' + key), field: key}));
-    return <InspectionsHistory {...props} columns={columns}/>
+    return <InspectionsHistory {...props} columns={columns} addNewForm={addNewForm}/>
 };
 
 const mapStateToProps = (state, props) => {

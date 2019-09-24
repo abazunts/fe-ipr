@@ -6,11 +6,11 @@ let styles = {
         cursor: 'pointer',
         background: '#00a19b',
         border: 'none',
-        borderRadius: '25px',
+        borderRadius: '5px',
         color: 'white',
         padding: '10px',
-        width: '150px',
-        boxShadow: '1px 3px 14px -1px  #009A94',
+        width: '50px',
+        boxShadow: '1px 3px 5px -1px  #009A94',
 
     },
     buttonWrapper: {
@@ -18,7 +18,7 @@ let styles = {
     }
 };
 
-const Button = props => {
+const ButtonAdd = props => {
     const {classes} = props;
     return <div className={classes.buttonWrapper}>
         <button className={classes.button} onClick={props.onClick}>
@@ -28,4 +28,4 @@ const Button = props => {
 
 };
 
-export default injectSheet(styles)(Button)
+export default injectSheet(styles)(ButtonAdd)

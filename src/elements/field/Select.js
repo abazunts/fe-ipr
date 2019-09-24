@@ -37,36 +37,30 @@ const styles = {
         color: "#da2626",
     },
 
-    display: {
+    select: {
         display: 'flex'
     },
-
     button: {
         marginLeft: '5px'
     }
 };
 
-const FieldWrapper = (props) => {
-    const {classes, show, t} = props;
+const Select = (props) => {
+    const {classes, value, title, name, t, visibleButtonAdd = true} = props;
     return <div className={classes.row}>
         <div className={classes.title}>
-            {props.title}
+            {title}
         </div>
-        <div className={classes.display}>
-            <Field className={classes.field} {...props}>
-                {props.children}
+        <div className={classes.select}>
+            <Field component="select" name={name} className={classes.field}>
+                {value.map(n => <option key={n.value} value={n.value}>{n.value}</option>)}
             </Field>
-            {props.errors[props.name] && props.touched[props.name] ? (
-                <div className={classes.fieldError}>
-                    {props.t(props.errors[props.name])}
-                </div>
-            ) : null}
-            {show &&
-            <div className={classes.button}>
-                <Button title={"+"} background={'#0065a1'} width={'50px'}/>
+            {visibleButtonAdd &&
+            <div className={classes.button} >
+                <Button title={t("inspections.add")} background={'#0065a1'} width={'50px'}/>
             </div>}
         </div>
     </div>
 };
 
-export default injectSheet(styles)(FieldWrapper);
+export default injectSheet(styles)(Select);

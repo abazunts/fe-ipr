@@ -4,6 +4,7 @@ import injectSheet from "react-jss";
 import {Route} from "react-router-dom";
 import LoginContainer from "./ui/Login/Login";
 import InspectionsHistoryContainer from "./ui/Inspections/InspectionHistory";
+import NewInspectionContainer from "./ui/Inspections/NewInspectionForm";
 
 let styles = {
     wrapperContent: {
@@ -11,14 +12,19 @@ let styles = {
         flexDirection: 'column',
         backgroundColor: '#f9f9f9',
         height: '100vh',
+        overflowY: 'auto',
     },
     header: {
-        boxShadow: '1px 31px 18px -27px #c5c5c5'
+        boxShadow: '1px 31px 18px -27px #c5c5c5',
+        position: "sticky",
+        top: '0',
     },
 
     content: {
         alignSelf: 'center',
         marginTop: '50px',
+        maxWidth: '100vh',
+        maxHeight: '70vh',
     },
 
     footer: {
@@ -47,6 +53,7 @@ const App = (props) => {
             <div className={classes.content}>
                 <Route exact path={'/'} render={() => <LoginContainer/>}/>
                 <Route exact path={'/inspections/:id?'} render={() => <InspectionsHistoryContainer/>}/>
+                <Route exact path={'/inspections/add'} render={() => <NewInspectionContainer/>}/>
             </div>
             <div className={classes.footer}>
                 <span>All rights reserved for the Saudi Authority for Intellectual Property © 2019</span>

@@ -1,4 +1,5 @@
 import {columnsTableHistory} from "../models/tableData";
+import {nationality} from "../assets/nationality/nationality";
 
 const SET_SELECTED_ROW = 'ENFORCEMENT/HISTORY_REDUCER/SET_SELECTED_ROW';
 
@@ -131,6 +132,8 @@ const initState = {
         rowId: null,
 
         columnsTable: columnsTableHistory,
+        nationality: nationality,
+        violationItems: []
     }
 ;
 

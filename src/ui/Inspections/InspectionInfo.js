@@ -3,7 +3,6 @@ import {NavLink} from "react-router-dom";
 
 
 const InspectionInfo = (props) => {
-    debugger
     return <div>
         <NavLink to={'/inspections'}>Back list</NavLink>
         {props.id}
