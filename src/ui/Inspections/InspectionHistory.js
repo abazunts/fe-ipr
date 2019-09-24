@@ -5,18 +5,33 @@ import {compose} from "redux";
 import {translate} from "react-i18next";
 import {withRouter} from "react-router-dom";
 import InspectionInfo from "./InspectionInfo";
+import Button from "../../elements/Button/button";
+import injectSheet from "react-jss";
+
+const styles = {
+    addButton: {
+        marginBottom: '20px',
+        textAlign: 'right',
+    }
+};
 
 const InspectionsHistory = (props) => {
+    const {t, classes} = props;
     return <div>
         {!props.id ?
-            <MaterialTable
-                title="Inspections"
-                columns={props.columns}
-                data={props.data}
-                onRowClick={(event, rowData) => {
-                    props.history.push(`../inspections/${rowData.id}`);
-                }}
-            />
+            <div>
+                <div className={classes.addButton}>
+                    <Button title={t("inspections.btnNewInspection")}/>
+                </div>
+                <MaterialTable
+                    title="Inspections"
+                    columns={props.columns}
+                    data={props.data}
+                    onRowClick={(event, rowData) => {
+                        props.history.push(`../inspections/${rowData.id}`);
+                    }}
+                />
+            </div>
             : <InspectionInfo id={props.id}/>}
 
     </div>
@@ -38,6 +53,7 @@ const mapStateToProps = (state, props) => {
 
 
 export default compose(
+    injectSheet(styles),
     withRouter,
     connect(mapStateToProps, null),
     translate("common"),

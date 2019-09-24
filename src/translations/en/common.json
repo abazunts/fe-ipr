@@ -4,7 +4,8 @@
     "inspectionType": "Inspection Type",
     "inspectionDate": "Inspection Date",
     "inspectorName": "Employee Name",
-    "violationsCount": "Violation Count"
+    "violationsCount": "Violation Count",
+    "btnNewInspection": "New Inspection"
   },
   "login": {
     "email": "Email",
