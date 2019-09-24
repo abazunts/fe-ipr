@@ -3,6 +3,7 @@ import injectSheet from 'react-jss';
 import logo from '../../assets/img/saip-logo.png';
 import NavbarContainer from "../Navbar/Navbar";
 import UserInfo from "../Login/UserInfo";
+import s from './header.module.css'
 
 let styles = {
     headerWrapper: {

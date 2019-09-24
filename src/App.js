@@ -3,6 +3,7 @@ import HeaderContainer from "./ui/Header/Header";
 import injectSheet from "react-jss";
 import {Route} from "react-router-dom";
 import LoginContainer from "./ui/Login/Login";
+import InspectionsHistoryContainer from "./ui/Inspections/InspectionHistory";
 
 let styles = {
     wrapperContent: {
@@ -11,13 +12,13 @@ let styles = {
         backgroundColor: '#f9f9f9',
         height: '100vh',
     },
-
     header: {
         boxShadow: '1px 31px 18px -27px #c5c5c5'
     },
 
     content: {
         alignSelf: 'center',
+        marginTop: '50px',
     },
 
     footer: {
@@ -33,17 +34,19 @@ let styles = {
         fontSize: '12px'
     },
 
+
 };
 
 const App = (props) => {
     const {classes} = props;
     return (
-        <div className={classes.wrapperContent}>
+        <div {...props} className={classes.wrapperContent}>
             <div className={classes.header}>
                 <HeaderContainer/>
             </div>
             <div className={classes.content}>
                 <Route exact path={'/'} render={() => <LoginContainer/>}/>
+                <Route exact path={'/inspections/:id?'} render={() => <InspectionsHistoryContainer/>}/>
             </div>
             <div className={classes.footer}>
                 <span>All rights reserved for the Saudi Authority for Intellectual Property © 2019</span>
@@ -54,5 +57,17 @@ const App = (props) => {
     );
 };
 
-export default injectSheet(styles)(App);
+const AppContainer = (props) => {
+    const [innerWidth, setInnerWidth] = React.useState(0)
+    React.useEffect(() => {
+        window.addEventListener('resize', () => {
+            setInnerWidth(window.innerWidth)
+        })
+    }, []);
+
+    return <App {...props} innerWidth={innerWidth}/>
+};
+
+
+export default injectSheet(styles)(AppContainer);
 

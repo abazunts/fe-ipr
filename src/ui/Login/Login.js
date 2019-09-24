@@ -11,10 +11,9 @@ const styles = {
     loginContainer: {
         background: 'white',
         width: '50vh',
-        marginTop: '50px',
         padding: '30px',
         textAlign: 'center',
-        boxShadow: "1px 0px 24px 5px #c5c5c5",
+        boxShadow: "1px 1px 6px 1px #c5c5c5",
     },
     buttonSubmit: {
         marginTop: '20px',

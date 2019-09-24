@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
+import AppContainer from './App';
 import * as serviceWorker from './serviceWorker';
 import 'react-table/react-table.css'
 import {store} from "./redux/store";
@@ -29,7 +29,7 @@ ReactDOM.render(
     <I18nextProvider i18n={i18next} initialLanguage={'en'}>
         <Provider store={store}>
             <BrowserRouter>
-                <App/>
+                <AppContainer/>
             </BrowserRouter>
         </Provider>
     </I18nextProvider>
