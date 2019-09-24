@@ -1,0 +1,16 @@
+{
+  "inspections": {
+    "shopName": "Shop Name",
+    "inspectionType": "Inspection Type",
+    "inspectionDate": "Inspection Date",
+    "inspectorName": "Employee Name",
+    "violationsCount": "Violation Count"
+  },
+  "login": {
+    "email": "Email",
+    "password": "Password",
+    "loginButton": "Login",
+    "emailRequired": "Email is Required",
+    "passwordRequired": "Password is Required"
+  }
+}
