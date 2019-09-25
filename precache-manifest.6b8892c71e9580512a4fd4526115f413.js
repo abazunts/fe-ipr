@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "9a54c15a788c4c742d9b05bd68d23794",
+    "revision": "5b186181a4d16d462b66767c4e457aa5",
     "url": "/fe-ipr/index.html"
   },
   {
@@ -8,7 +8,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/fe-ipr/static/css/2.11f871ab.chunk.css"
   },
   {
-    "revision": "d0907796936a63531aac",
+    "revision": "406394ba5a1bfcdfc133",
     "url": "/fe-ipr/static/css/main.de7f23f4.chunk.css"
   },
   {
@@ -16,8 +16,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/fe-ipr/static/js/2.939b0dea.chunk.js"
   },
   {
-    "revision": "d0907796936a63531aac",
-    "url": "/fe-ipr/static/js/main.f064a6fa.chunk.js"
+    "revision": "406394ba5a1bfcdfc133",
+    "url": "/fe-ipr/static/js/main.f0ebd0b8.chunk.js"
   },
   {
     "revision": "b442f1bbeb0e369bac0e",
