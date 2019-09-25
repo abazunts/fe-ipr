@@ -5,6 +5,9 @@ import s from './UserInfo.module.css'
 import iconDown from '../../assets/img/icondown.png'
 import signOut from '../../assets/img/signout.png'
 import editProfile from '../../assets/img/editprofile.png'
+import {connect} from "react-redux";
+import {compose} from "redux";
+import {NavLink} from "react-router-dom";
 
 let styles = {
     wrapperContent: {
@@ -50,37 +53,67 @@ let styles = {
 
     button: {
         gridColumn: '3',
-    }
+    },
 
+    login: {
+        gridColumn: '2',
+        textAlign: 'center',
+        textDecoration: 'none',
+        color: '#197c71',
+        "&:hover": {
+            textDecoration: 'outline'
+        }
+    }
 
 
 };
 
 const UserInfo = (props) => {
-    const {classes} = props;
-    return <div className={classes.wrapperContent}>
-        <div className={classes.shapeIcon}>
-            <img src={shapeIcon} className={classes.icon}/>
-        </div>
-        <div className={classes.userInfo}>
-            <div className={classes.welcome}>
-                Welcome
-            </div>
-            <div className={classes.userName}>
-                FirstName
-          </div>
-        </div>
-        <div className={classes.button}>
-            <div className={s.topMenu}>
-                <div><button className={s.submenuLink}><img src={iconDown}/></button>
-                    <div className={s.submenu}>
-                        <button><img src={editProfile}/> Edit Account Information</button>
-                        <button><img src={signOut}/>Sign Out</button>
+    const {classes, isAuth, user} = props;
+    return <div className={isAuth && classes.wrapperContent}>
+        {isAuth ? <>
+                <div className={classes.shapeIcon}>
+                    <img src={shapeIcon} className={classes.icon}/>
+                </div>
+                <div className={classes.userInfo}>
+                    <div className={classes.welcome}>
+                        Welcome
+                    </div>
+                    <div className={classes.userName}>
+                        {user.userName}
                     </div>
                 </div>
-            </div>
-        </div>
+                <div className={classes.button}>
+                    <div className={s.topMenu}>
+                        <div>
+                            <button className={s.submenuLink}><img src={iconDown}/></button>
+                            <div className={s.submenu}>
+                                <button><img src={editProfile}/> Edit Account Information</button>
+                                <button><img src={signOut}/>Sign Out</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </>
+            : <NavLink to={'/'} className={classes.login}>Sign In</NavLink>}
     </div>
 };
 
-export default injectSheet(styles)(UserInfo);
+
+
+
+const UserInfoContainer = (props) => {
+    return <UserInfo {...props}/>
+};
+
+const mapStateToProps = (state) => {
+    return {
+        isAuth: state.loginPage.isAuth,
+        user: state.loginPage.user,
+    }
+}
+
+export default compose(
+    injectSheet(styles),
+    connect(mapStateToProps)
+)(UserInfoContainer);

@@ -46,13 +46,13 @@ const styles = {
 };
 
 const Select = (props) => {
-    const {classes, value, title, name, t, visibleButtonAdd = true} = props;
+    const {classes, value, title, name, t, visibleButtonAdd} = props;
     return <div className={classes.row}>
         <div className={classes.title}>
             {title}
         </div>
         <div className={classes.select}>
-            <Field component="select" name={name} className={classes.field}>
+            <Field component="select" name={name} className={classes.field} >
                 {value.map(n => <option key={n.value} value={n.value}>{n.value}</option>)}
             </Field>
             {visibleButtonAdd &&

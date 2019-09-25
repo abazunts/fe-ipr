@@ -13,6 +13,7 @@ import {getDateTimeToString} from "../../utils/getDateTimeToString";
 import {Field as FieldFormik} from 'formik';
 import {usePosition} from 'use-position';
 import {withRouter} from "react-router-dom";
+import ModalViolation from "../Modal/ModalViolation";
 
 const styles = {
     formContainer: {
@@ -72,6 +73,15 @@ const NewInspectionContainer = (props) => {
     const [inspectorSignature, setInspectorSignature] = React.useState(null);
     const [signature, setSignature] = React.useState(null);
     const [startTime, setStartTime] = React.useState(null);
+    const [violation, setViolation] = React.useState([]);
+    const [count, setCount] = React.useState('');
+
+    const useStateData = {
+        count,
+        setCount,
+        violation,
+        setViolation
+    };
 
     React.useEffect(() => {
         setStartTime(getDateTimeToString(new Date()))
@@ -85,11 +95,12 @@ const NewInspectionContainer = (props) => {
     };
 
     const onSubmit = (values) => {
-    debugger
+        debugger
     };
     return <NewInspection {...props} onSubmit={onSubmit} setInspectorSignature={setInspectorSignature}
                           inspectorSignature={inspectorSignature} signature={signature} setSignature={setSignature}
-                          coordination={coordination} startTime={startTime} cancel={cancel}/>
+                          coordination={coordination} startTime={startTime} cancel={cancel}
+                          useStateData={useStateData}/>
 };
 
 const mapStateToProps = (state) => {
@@ -115,7 +126,7 @@ const LoginSchema = Yup.object().shape({
 });
 
 const NewInspectionForm = (props) => {
-    const {t, classes, nationality, violationItems, inspectorSignature, setInspectorSignature, signature, setSignature, coordination, startTime, cancel} = props;
+    const {t, classes, nationality, violationItems, inspectorSignature, setInspectorSignature, signature, setSignature, coordination, startTime, cancel, useStateData} = props;
     return (
         <Formik
             initialValues={{
@@ -235,12 +246,12 @@ const NewInspectionForm = (props) => {
                     <div>
                         <Field name="employeeName"
                                title={t("inspections.employeeName")}
-                               errors={errors} touched={touched} show={{show: true}}/>
+                               errors={errors} touched={touched}/>
                     </div>
                     <div>
                         <Field name="employeeId"
                                title={t("inspections.employeeId")}
-                               errors={errors} touched={touched} show={{show: true}}/>
+                               errors={errors} touched={touched}/>
                     </div>
                     <div>
                         <Select name='nationality' title={t("inspections.nationality")}
@@ -248,13 +259,10 @@ const NewInspectionForm = (props) => {
 
                     </div>
                     <div>
-                        <Select name='violationItems' title={t("inspections.violationItems")}
-                                value={violationItems} t={t}/>
-                    </div>
-                    <div>
-                        <Field name="violationsCount"
-                               title={t("inspections.violationsCount")}
-                               errors={errors} touched={touched}/>
+                        <div className={classes.button}>
+                            <div className={classes.title}>{t("inspections.violations")}</div>
+                            <ModalViolation t={t} {...useStateData} errors={errors} touched={touched}/>
+                        </div>
                     </div>
                     <div>
                         <Field name="notes"
@@ -304,10 +312,12 @@ const NewInspectionForm = (props) => {
                     <div className={classes.buttonWrapper}>
                         <div className={classes.buttonSubmit}>
                             <div className={classes.button}>
-                                <Button title={t("inspections.cancel")} background={'white'} width={'120px'} color={"white"} onClick={cancel}/>
+                                <Button title={t("inspections.cancel")} background={'white'} width={'120px'}
+                                        color={"white"} onClick={cancel}/>
                             </div>
                             <div className={classes.button}>
-                                <Button title={t("inspections.withOutSubmit")} width={'170px'} background={'white'} color={"white"}/>
+                                <Button title={t("inspections.withOutSubmit")} width={'170px'} background={'white'}
+                                        color={"white"}/>
                             </div>
                         </div>
                         <div className={classes.buttonSubmit}>

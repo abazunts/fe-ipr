@@ -40,7 +40,9 @@
     "closeButton": "Close",
     "addSignature": "Add Signature",
     "cancel": "Cancel & Return",
-    "withOutSubmit": "Save Without Submitting"
+    "withOutSubmit": "Save Without Submitting",
+    "addViolation": "Add Violation",
+    "violations": "Violations List"
   },
   "login": {
     "email": "Email",

@@ -2,7 +2,7 @@ import React from 'react'
 import injectSheet from 'react-jss';
 import logo from '../../assets/img/saip-logo.png';
 import NavbarContainer from "../Navbar/Navbar";
-import UserInfo from "../Login/UserInfo";
+import UserInfoContainer from "../Login/UserInfo";
 import s from './header.module.css'
 
 let styles = {
@@ -46,7 +46,7 @@ const Header = (props) => {
             <NavbarContainer/>
         </div>
         <div className={classes.login}>
-           <UserInfo/>
+           <UserInfoContainer/>
         </div>
     </div>
 };

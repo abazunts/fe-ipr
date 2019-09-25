@@ -23,6 +23,7 @@
     "react-signature-canvas": "^1.0.3",
     "react-signature-pad": "0.0.6",
     "react-table": "^6.10.3",
+    "reactjs-localstorage": "0.0.7",
     "redux": "^4.0.4",
     "redux-thunk": "^2.3.0",
     "use-position": "0.0.6",

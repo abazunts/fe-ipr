@@ -6,6 +6,8 @@ import Button from "../../elements/Button/button";
 import {compose} from "redux";
 import injectSheet from "react-jss";
 import Field from '../../elements/field'
+import {authMe, login} from "../../redux/loginReducer";
+import {connect} from "react-redux";
 
 const styles = {
     loginContainer: {
@@ -28,15 +30,19 @@ const Login = (props) => {
 };
 
 const LoginContainer = (props) => {
+    React.useEffect(()=> {
+        props.authMe()
+    },[]);
     const onSubmit = (values) => {
-        debugger
+        props.login(values)
     };
     return <Login {...props} onSubmit={onSubmit}/>
 };
 
 export default compose(
     translate("common"),
-    injectSheet(styles)
+    injectSheet(styles),
+    connect(null, {login, authMe})
 )(LoginContainer);
 
 
@@ -65,12 +71,12 @@ const LoginForm = (props) => {
                     <div>
                         <Field name="email"
                                title={t("login.email")}
-                               errors={errors} touched={touched}/>
+                               errors={errors} touched={touched} t={t}/>
                     </div>
                     <div>
                         <Field name="password"
                                title={t("login.password")}
-                               errors={errors} touched={touched} type={'password'}/>
+                               errors={errors} touched={touched} type={'password'} t={t}/>
                     </div>
                     <div className={classes.buttonSubmit}>
                         <Button title={t("login.loginButton")}/>
