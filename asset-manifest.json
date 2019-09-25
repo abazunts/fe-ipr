@@ -1,0 +1,19 @@
+{
+  "files": {
+    "main.css": "/fe-ipr/static/css/main.de7f23f4.chunk.css",
+    "main.js": "/fe-ipr/static/js/main.b1951ffe.chunk.js",
+    "main.js.map": "/fe-ipr/static/js/main.b1951ffe.chunk.js.map",
+    "runtime~main.js": "/fe-ipr/static/js/runtime~main.6f84fff9.js",
+    "runtime~main.js.map": "/fe-ipr/static/js/runtime~main.6f84fff9.js.map",
+    "static/css/2.11f871ab.chunk.css": "/fe-ipr/static/css/2.11f871ab.chunk.css",
+    "static/js/2.10bde98d.chunk.js": "/fe-ipr/static/js/2.10bde98d.chunk.js",
+    "static/js/2.10bde98d.chunk.js.map": "/fe-ipr/static/js/2.10bde98d.chunk.js.map",
+    "index.html": "/fe-ipr/index.html",
+    "precache-manifest.90592e892c0ce2baa28ddb20d4ece212.js": "/fe-ipr/precache-manifest.90592e892c0ce2baa28ddb20d4ece212.js",
+    "service-worker.js": "/fe-ipr/service-worker.js",
+    "static/css/2.11f871ab.chunk.css.map": "/fe-ipr/static/css/2.11f871ab.chunk.css.map",
+    "static/css/main.de7f23f4.chunk.css.map": "/fe-ipr/static/css/main.de7f23f4.chunk.css.map",
+    "static/media/index.css": "/fe-ipr/static/media/flUhRq6tzZclQEJ-Vdg-IuiaDsNc.d7e60f9d.woff2",
+    "static/media/saip-logo.png": "/fe-ipr/static/media/saip-logo.34cf6f06.png"
+  }
+}
