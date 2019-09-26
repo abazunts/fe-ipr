@@ -3,7 +3,7 @@ import MaterialTable from 'material-table';
 import {connect} from "react-redux";
 import {compose} from "redux";
 import {translate} from "react-i18next";
-import {withRouter} from "react-router-dom";
+import {Redirect, withRouter} from "react-router-dom";
 import InspectionInfo from "./InspectionInfo";
 import injectSheet from "react-jss";
 import Button from "../../elements/Button/button";
@@ -46,19 +46,23 @@ const InspectionsHistory = (props) => {
 };
 
 const InspectionsHistoryContainer = (props) => {
-    const {columnsTable, t} = props;
+    const {columnsTable, t, isAuth} = props;
     const addNewForm = () => {
         props.history.push(`../inspections/add`);
     };
     const columns = Object.keys(columnsTable).map(key => ({title: t('inspections.' + key), field: key}));
-    return <InspectionsHistory {...props} columns={columns} addNewForm={addNewForm}/>
+    return <>
+        {!isAuth && <Redirect to={'/login'}/>}
+        <InspectionsHistory {...props} columns={columns} addNewForm={addNewForm}/>
+        </>
 };
 
 const mapStateToProps = (state, props) => {
     return {
         data: state.historyPage.data,
         columnsTable: state.historyPage.columnsTable,
-        id: props.match.params.id
+        id: props.match.params.id,
+        isAuth: state.loginPage.isAuth
     }
 };
 

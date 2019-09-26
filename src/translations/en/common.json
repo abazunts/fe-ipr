@@ -46,10 +46,14 @@
 
   },
   "login": {
-    "email": "Email",
+    "email": "Username",
     "password": "Password",
     "loginButton": "Login",
     "emailRequired": "Email is Required",
     "passwordRequired": "Password is Required"
+  },
+  "code": {
+    "en": "en",
+    "ar": "عربي"
   }
 }

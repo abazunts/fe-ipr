@@ -2,6 +2,7 @@ import React from 'react';
 import Modal from 'react-modal';
 import Signature from "./index";
 import Button from "../../elements/Button/button";
+import injectSheet from "react-jss";
 
 const customStyles = {
     content: {
@@ -13,6 +14,21 @@ const customStyles = {
         transform: 'translate(-50%, -50%)',
         width: 'auto',
         height: 'auto',
+    }
+};
+
+let styles = {
+    button: {
+        cursor: 'pointer',
+        textAlign: 'center',
+        fontSize: '12px',
+        background: '#0065a1',
+        border: 'none',
+        borderRadius: '25px',
+        color: 'white',
+        padding: '10px',
+        width: '100px'
+
     }
 };
 
@@ -37,7 +53,8 @@ class ModalSignature extends React.Component {
     render() {
         return (
             <div>
-                <Button onClick={this.openModal} title={this.props.t('inspections.addSignature')} background={'#0065a1'}/>
+                {/*<Button onClick={this.openModal} title={this.props.t('inspections.addSignature')} background={'#0065a1'}/>*/}
+                <div className={this.props.classes.button} onClick={this.openModal}>{this.props.t('inspections.addSignature')}</div>
                 <Modal
                     isOpen={this.state.modalIsOpen}
                     onRequestClose={this.closeModal}
@@ -51,4 +68,4 @@ class ModalSignature extends React.Component {
     }
 }
 
-export default ModalSignature
+export default injectSheet(styles)(ModalSignature)

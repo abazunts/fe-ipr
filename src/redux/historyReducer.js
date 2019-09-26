@@ -1,7 +1,9 @@
 import {columnsTableHistory} from "../models/tableData";
 import {nationality} from "../assets/nationality/nationality";
+import {reactLocalStorage} from "reactjs-localstorage";
 
 const SET_SELECTED_ROW = 'ENFORCEMENT/HISTORY_REDUCER/SET_SELECTED_ROW';
+const SET_INSPECTION = 'ENFORCEMENT/HISTORY_REDUCER/SET_INSPECTION';
 
 const inspectionType = ['Visit', 'Report', 'Complain'];
 
@@ -133,7 +135,10 @@ const initState = {
 
         columnsTable: columnsTableHistory,
         nationality: nationality,
-        violationItems: []
+        violationItems: [{value: 'Photocopied Book'}, {value: 'Imitated Book'},
+            {value: 'Cassette'}, {value: 'DVD-CD'}, {value: 'Cassette Copy Machine'},
+            {value: 'DVD-CD Copy Machine'}, {value: 'PC Desktop'}, {value: 'Laptob'},
+            {value: 'Flash Memory'}, {value: 'Hardisk'}, {value: 'Receiver'}, {value: 'Phone Memory Card'}]
     }
 ;
 
@@ -144,13 +149,26 @@ const historyReducer = (state = initState, action) => {
             return {
                 ...state,
                 rowId: action.rowId,
-            }
+            };
+        case SET_INSPECTION:
+            return {
+                ...state,
+                data: [...state.data, action.data],
+            };
         default:
             return state
     }
 };
 
 export const setSelectedRow = (rowId) => ({type: SET_SELECTED_ROW, rowId});
+export const setInspection = (data) => ({type: SET_INSPECTION, data});
+
+
+export const addInspection = (inspection) => (dispatch) => {
+    debugger
+
+    reactLocalStorage.setObject('inspections', null);
+};
 
 export default historyReducer;
 

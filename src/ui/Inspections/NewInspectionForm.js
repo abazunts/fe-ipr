@@ -14,6 +14,7 @@ import {Field as FieldFormik} from 'formik';
 import {usePosition} from 'use-position';
 import {withRouter} from "react-router-dom";
 import ModalViolation from "../Modal/ModalViolation";
+import {addInspection, setInspection} from "../../redux/historyReducer";
 
 const styles = {
     formContainer: {
@@ -55,7 +56,12 @@ const styles = {
     buttonWrapper: {
         marginTop: '20px',
         display: 'flex',
-        justifyContent: 'space-between'
+        justifyContent: 'space-between',
+        flexWrap: 'wrap'
+    },
+    violations: {
+        marginBottom: '10px',
+        color: '#00a19b'
     }
 
 
@@ -76,6 +82,12 @@ const NewInspectionContainer = (props) => {
     const [violation, setViolation] = React.useState([]);
     const [count, setCount] = React.useState('');
 
+    const [state, setState] = React.useState({
+        shopLocation: null,
+        startTime: null,
+        violations: []
+    });
+
     const useStateData = {
         count,
         setCount,
@@ -95,12 +107,14 @@ const NewInspectionContainer = (props) => {
     };
 
     const onSubmit = (values) => {
-        debugger
+        props.setInspection({...values, violations: state.violations})
+        props.history.push(`../inspections`);
+
     };
     return <NewInspection {...props} onSubmit={onSubmit} setInspectorSignature={setInspectorSignature}
                           inspectorSignature={inspectorSignature} signature={signature} setSignature={setSignature}
                           coordination={coordination} startTime={startTime} cancel={cancel}
-                          useStateData={useStateData}/>
+                          useStateData={useStateData} state={state} setState={setState}/>
 };
 
 const mapStateToProps = (state) => {
@@ -114,7 +128,7 @@ export default compose(
     translate("common"),
     withRouter,
     injectSheet(styles),
-    connect(mapStateToProps, null)
+    connect(mapStateToProps, {setInspection})
 )(NewInspectionContainer);
 
 
@@ -126,7 +140,7 @@ const LoginSchema = Yup.object().shape({
 });
 
 const NewInspectionForm = (props) => {
-    const {t, classes, nationality, violationItems, inspectorSignature, setInspectorSignature, signature, setSignature, coordination, startTime, cancel, useStateData} = props;
+    const {t, classes, nationality, violationItems, i18n, inspectorSignature, setInspectorSignature, signature, setSignature, coordination, startTime, cancel, useStateData, state, setState} = props;
     return (
         <Formik
             initialValues={{
@@ -168,7 +182,8 @@ const NewInspectionForm = (props) => {
                     <div>
                         <Field name="startTime"
                                title={t("inspections.startTime")}
-                               errors={errors} touched={touched} type={'datetime'} value={startTime} disabled/>
+                               errors={errors} touched={touched} type={'datetime'} value={startTime} disabled
+                               i18n={i18n} t={t}/>
                     </div>
                     <div>
                         <div className={classes.title}>{t("inspections.violation")}</div>
@@ -196,83 +211,87 @@ const NewInspectionForm = (props) => {
                     <div>
                         <Field name="complain"
                                title={t("inspections.complain")}
-                               errors={errors} touched={touched}/>
+                               errors={errors} touched={touched} i18n={i18n} t={t}/>
                     </div>
                     <div>
                         <Field name="shopName"
                                title={t("inspections.shopName")}
-                               errors={errors} touched={touched}/>
+                               errors={errors} touched={touched} i18n={i18n} t={t}/>
                     </div>
                     <div>
                         <Field name="shopLocation"
                                title={t("inspections.shopLocation")}
-                               errors={errors} value={coordination}/>
+                               errors={errors} value={coordination} i18n={i18n} t={t}/>
                     </div>
                     <div>
                         <Field name="ownerName"
                                title={t("inspections.ownerName")}
-                               errors={errors} touched={touched}/>
+                               errors={errors} touched={touched} i18n={i18n} t={t}/>
                     </div>
                     <div>
                         <Field name="ownerPhone"
                                title={t("inspections.ownerPhone")}
-                               errors={errors} touched={touched}/>
+                               errors={errors} touched={touched} i18n={i18n} t={t}/>
                     </div>
                     <div>
                         <Field name="ownerId"
                                title={t("inspections.ownerId")}
-                               errors={errors} touched={touched}/>
+                               errors={errors} touched={touched} i18n={i18n} t={t}/>
                     </div>
                     <div>
                         <Field name="licenseNumber"
                                title={t("inspections.licenseNumber")}
-                               errors={errors} touched={touched}/>
+                               errors={errors} touched={touched} i18n={i18n} t={t}/>
                     </div>
                     <div>
                         <Field name="licenseDate"
                                title={t("inspections.licenseDate")}
-                               errors={errors} touched={touched} type={'date'}/>
+                               errors={errors} touched={touched} type={'date'} i18n={i18n} t={t}/>
                     </div>
                     <div>
                         <Field name="inspectionDate"
                                title={t("inspections.inspectionDate")}
-                               errors={errors} touched={touched} type={'date'}/>
+                               errors={errors} touched={touched} type={'date'} i18n={i18n} t={t}/>
                     </div>
                     <div>
                         <Field name="inspectionTime"
                                title={t("inspections.inspectionTime")}
-                               errors={errors} touched={touched} type={'time'}/>
+                               errors={errors} touched={touched} type={'time'} i18n={i18n} t={t}/>
                     </div>
                     <div>
                         <Field name="employeeName"
                                title={t("inspections.employeeName")}
-                               errors={errors} touched={touched}/>
+                               errors={errors} touched={touched} i18n={i18n} t={t}/>
                     </div>
                     <div>
                         <Field name="employeeId"
                                title={t("inspections.employeeId")}
-                               errors={errors} touched={touched}/>
+                               errors={errors} touched={touched} i18n={i18n} t={t}/>
                     </div>
                     <div>
                         <Select name='nationality' title={t("inspections.nationality")}
-                                value={nationality} t={t}/>
+                                value={nationality} t={t} i18n={i18n}/>
 
                     </div>
                     <div>
                         <div className={classes.button}>
                             <div className={classes.title}>{t("inspections.violations")}</div>
-                            <ModalViolation t={t} {...useStateData} errors={errors} touched={touched}/>
+                            <div className={classes.violations}>
+                                {state.violations.map(v => <div>{v.title} : {v.count} </div>)}
+                            </div>
+                            <ModalViolation t={t} {...useStateData} errors={errors} touched={touched} i18n={i18n}
+                                            state={state} setState={setState} violationItems={violationItems}/>
                         </div>
                     </div>
                     <div>
                         <Field name="notes"
                                title={t("inspections.notes")}
-                               errors={errors} touched={touched}/>
+                               errors={errors} touched={touched} i18n={i18n} t={t}/>
                     </div>
                     <div>
                         <Field name="shopPersonName"
                                title={t("inspections.shopPersonName")}
-                               errors={errors} touched={touched}/>
+                               errors={errors} touched={touched} i18n={i18n} t={t}/>
                     </div>
                     <div>
                         <div className={classes.button}>
@@ -288,13 +307,13 @@ const NewInspectionForm = (props) => {
                     </div>
                     <div>
                         <Select name='shopPersonNationality' title={t("inspections.shopPersonNationality")}
-                                value={nationality} t={t} visibleButtonAdd={false}/>
+                                value={nationality} t={t} visibleButtonAdd={false} i18n={i18n}/>
 
                     </div>
                     <div>
                         <Field name="shopPersonId"
                                title={t("inspections.shopPersonId")}
-                               errors={errors} touched={touched}/>
+                               errors={errors} touched={touched} i18n={i18n} t={t}/>
                     </div>
                     <div className={classes.button}>
                         <div className={classes.title}>{t("inspections.inspectionSignature")}</div>
@@ -307,7 +326,7 @@ const NewInspectionForm = (props) => {
                         <ModalSignature setDataURL={setInspectorSignature} t={t}/>
                     </div>
                     <div>
-                        <Field type='file' name="attachments" errors={errors} touched={touched}/>
+                        <Field type='file' name="attachments" errors={errors} touched={touched} i18n={i18n} t={t}/>
                     </div>
                     <div className={classes.buttonWrapper}>
                         <div className={classes.buttonSubmit}>

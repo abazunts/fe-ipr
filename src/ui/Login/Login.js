@@ -8,6 +8,7 @@ import injectSheet from "react-jss";
 import Field from '../../elements/field'
 import {authMe, login} from "../../redux/loginReducer";
 import {connect} from "react-redux";
+import {Redirect, withRouter} from "react-router-dom";
 
 const styles = {
     loginContainer: {
@@ -23,26 +24,33 @@ const styles = {
 };
 
 const Login = (props) => {
-    const {classes} = props;
+    const {classes, isAuth} = props;
+    debugger
     return <div className={classes.loginContainer}>
+        {isAuth && <Redirect to={'/'}/>}
         <LoginForm {...props} />
     </div>
 };
 
 const LoginContainer = (props) => {
-    React.useEffect(()=> {
-        props.authMe()
-    },[]);
+
     const onSubmit = (values) => {
         props.login(values)
     };
     return <Login {...props} onSubmit={onSubmit}/>
 };
 
+const mapStateToProps = (state) => {
+    return {
+        isAuth: state.loginPage.isAuth,
+    }
+};
+
 export default compose(
+    withRouter,
     translate("common"),
     injectSheet(styles),
-    connect(null, {login, authMe})
+    connect(mapStateToProps, {login, authMe})
 )(LoginContainer);
 
 
@@ -71,12 +79,12 @@ const LoginForm = (props) => {
                     <div>
                         <Field name="email"
                                title={t("login.email")}
-                               errors={errors} touched={touched} t={t}/>
+                               errors={errors} touched={touched} t={t} i18n={props.i18n}/>
                     </div>
                     <div>
                         <Field name="password"
                                title={t("login.password")}
-                               errors={errors} touched={touched} type={'password'} t={t}/>
+                               errors={errors} touched={touched} type={'password'} t={t} i18n={props.i18n}/>
                     </div>
                     <div className={classes.buttonSubmit}>
                         <Button title={t("login.loginButton")}/>

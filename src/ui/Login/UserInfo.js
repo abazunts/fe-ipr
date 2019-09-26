@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {Fragment} from 'react';
 import injectSheet from "react-jss";
 import shapeIcon from '../../assets/img/shape.png'
 import s from './UserInfo.module.css'
@@ -8,6 +8,9 @@ import editProfile from '../../assets/img/editprofile.png'
 import {connect} from "react-redux";
 import {compose} from "redux";
 import {NavLink} from "react-router-dom";
+import Media from 'react-media';
+import Button from "../../elements/Button/button";
+import {logout} from "../../redux/loginReducer";
 
 let styles = {
     wrapperContent: {
@@ -15,7 +18,6 @@ let styles = {
         borderRadius: '30px',
         maxWidth: '25vh',
         minHeight: '3vh',
-
         display: 'grid',
         gridTemplateColumns: '1fr 5fr'
     },
@@ -48,7 +50,8 @@ let styles = {
     },
 
     icon: {
-        marginTop: '5px'
+        marginTop: '5px',
+        textAlign: 'center'
     },
 
     button: {
@@ -59,6 +62,7 @@ let styles = {
         gridColumn: '2',
         textAlign: 'center',
         textDecoration: 'none',
+        fontSize: '12px',
         color: '#197c71',
         "&:hover": {
             textDecoration: 'outline'
@@ -69,41 +73,54 @@ let styles = {
 };
 
 const UserInfo = (props) => {
-    const {classes, isAuth, user} = props;
-    return <div className={isAuth && classes.wrapperContent}>
-        {isAuth ? <>
-                <div className={classes.shapeIcon}>
-                    <img src={shapeIcon} className={classes.icon}/>
-                </div>
-                <div className={classes.userInfo}>
-                    <div className={classes.welcome}>
-                        Welcome
-                    </div>
-                    <div className={classes.userName}>
-                        {user.userName}
-                    </div>
-                </div>
-                <div className={classes.button}>
-                    <div className={s.topMenu}>
-                        <div>
-                            <button className={s.submenuLink}><img src={iconDown}/></button>
-                            <div className={s.submenu}>
-                                <button><img src={editProfile}/> Edit Account Information</button>
-                                <button><img src={signOut}/>Sign Out</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </>
-            : <NavLink to={'/'} className={classes.login}>Sign In</NavLink>}
-    </div>
+    const {classes, isAuth, user, logOut} = props;
+    return <Media queries={{
+            small: "(max-width: 599px)",
+            medium: "(min-width: 600px) and (max-width: 1199px)",
+            large: "(min-width: 1200px)"
+        }}>
+            {matches => (
+                <Fragment>
+                    {matches.large ?
+                    <div className={isAuth && classes.wrapperContent}>
+                        {isAuth ? <>
+                                <div className={classes.shapeIcon}>
+                                    <img src={shapeIcon} className={classes.icon}/>
+                                </div>
+                                <div className={classes.userInfo}>
+                                    <div className={classes.welcome}>
+                                        Welcome
+                                    </div>
+                                    <div className={classes.userName}>
+                                        {user.userName}
+                                    </div>
+                                </div>
+                                <div className={classes.button}>
+                                    <div className={s.topMenu}>
+                                        <div>
+                                            <button className={s.submenuLink}><img src={iconDown}/></button>
+                                            <div className={s.submenu}>
+                                                <button><img src={editProfile}/> Edit Account Information</button>
+                                                <button onClick={logOut}><img src={signOut} />Sign Out</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </>
+                            : <NavLink to={'/login'} className={classes.login}>Sign In</NavLink>}
+                    </div> : isAuth ? <NavLink className={classes.login} onClick={logOut}>Sign Out</NavLink> : <NavLink to={'/login'} className={classes.login}>Sign In</NavLink> }
+                </Fragment>
+            )}
+        </Media>
+
 };
 
 
-
-
 const UserInfoContainer = (props) => {
-    return <UserInfo {...props}/>
+    const logOut = () => {
+        props.logout()
+    };
+    return <UserInfo {...props} logOut={logOut}/>
 };
 
 const mapStateToProps = (state) => {
@@ -115,5 +132,5 @@ const mapStateToProps = (state) => {
 
 export default compose(
     injectSheet(styles),
-    connect(mapStateToProps)
+    connect(mapStateToProps, {logout})
 )(UserInfoContainer);

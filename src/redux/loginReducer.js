@@ -47,12 +47,27 @@ export const login = (values) => async (dispatch) => {
     }
 };
 
+export const logout = (values) => async (dispatch) => {
+    try {
+        const data = await loginApi.logout();
+        if(data.status === 'ok') {
+            reactLocalStorage.setObject('auth', null);
+            dispatch(setUser({
+                userId: null,
+                userName: null,
+                role: null
+            }));
+            dispatch(isAuth(false));
+        }
+    } catch (err) {
+
+    }
+};
+
 export const authMe = () => async (dispatch) => {
-    debugger
     try {
         const data = await loginApi.isAuth();
         if(data.status === 'ok') {
-            debugger
             dispatch(setUser(data.auth));
             dispatch(isAuth(true));
         }

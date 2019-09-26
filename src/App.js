@@ -51,7 +51,7 @@ const App = (props) => {
                 <HeaderContainer/>
             </div>
             <div className={classes.content}>
-                <Route exact path={'/'} render={() => <LoginContainer/>}/>
+                <Route exact path={'/login'} render={() => <LoginContainer/>}/>
                 <Route exact path={'/inspections/:id?'} render={() => <InspectionsHistoryContainer/>}/>
                 <Route exact path={'/inspections/add'} render={() => <NewInspectionContainer/>}/>
             </div>

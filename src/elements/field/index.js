@@ -18,6 +18,14 @@ const styles = {
         textAlign: 'left'
     },
 
+    titleRtl: {
+        color: "#676767",
+        fontSize: "16px",
+        fontWeight: "600",
+        paddingBottom: "6px",
+        textAlign: 'right'
+    },
+
     field: {
         width: "100%",
         height: "41px",
@@ -38,7 +46,8 @@ const styles = {
     },
 
     display: {
-        display: 'flex'
+        display: 'flex',
+        flexDirection: 'column'
     },
 
     button: {
@@ -47,13 +56,13 @@ const styles = {
 };
 
 const FieldWrapper = (props) => {
-    const {classes, show, t} = props;
+    const {classes, show, t, i18n} = props;
     return <div className={classes.row}>
-        <div className={classes.title}>
+        <div className={i18n.language === 'en' ? classes.title : classes.titleRtl}>
             {props.title}
         </div>
         <div className={classes.display}>
-            <Field className={classes.field} {...props}>
+            <Field className={classes.field} {...props} dir={i18n.language === 'ar' && 'rtl'}>
                 {props.children}
             </Field>
             {props.errors[props.name] && props.touched[props.name] ? (

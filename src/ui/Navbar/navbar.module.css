@@ -1,16 +1,6 @@
-.logoWrapper {
-    grid-row: 1;
-    margin-left: 80px;
-    max-width: 25vh;
-}
-
-.logoImg {
-    width: 25vh;
-}
-
 .submenuLink {
     cursor: pointer;
-    font-size: 18px;
+    font-size: 25px;
     color: #197c71;
 }
 
@@ -34,11 +24,11 @@
     background: white;
     border-radius: 10px;
     position: absolute;
-    left: 0px;
+    left: -180px;
     margin-top: 3px;
     top: 100%;
     z-index: 5;
-    width: 50px;
+    width: 205px;
     opacity: 0;
     transform: scaleY(0);
     transform-origin: 0 0;
@@ -57,7 +47,7 @@
 }
 
 .submenu button > img {
-    margin-right: 5px;
+   margin-right: 5px;
 }
 .submenu button:hover {
     background: #e5f0ef;
@@ -74,53 +64,3 @@ button:active, button:focus {
 button::-moz-focus-inner {
     border: 0;
 }
-
-/*@media (max-width: 1860px) {*/
-/*    .logoImg {*/
-/*        width: 20vh;*/
-/*    }*/
-/*}*/
-
-
-/*@media (max-width: 1750px) {*/
-/*    .logoImg {*/
-/*        width: 15vh;*/
-/*    }*/
-/*}*/
-
-/*@media (max-width: 1650px) {*/
-/*    .logoImg {*/
-/*        width: 10vh;*/
-/*    }*/
-/*}*/
-
-/*@media (max-width: 1550px) {*/
-/*    .logoImg {*/
-/*        width: 5vh;*/
-/*    }*/
-/*}*/
-
-/*@media (max-width: 1250px) {*/
-/*    .wrapperApp {*/
-/*        grid-template-columns: 1fr 4.5fr;*/
-/*    }*/
-/*}*/
-
-/*@media (max-width: 1050px) {*/
-/*    .wrapperApp {*/
-/*        grid-template-columns: 1fr 4fr;*/
-/*    }*/
-/*}*/
-
-/*@media (max-width: 1000px) {*/
-/*    .wrapperApp {*/
-/*        grid-template-columns: 1fr 4fr;*/
-/*    }*/
-/*}*/
-
-/*@media (max-width: 850px) {*/
-/*    .wrapperApp {*/
-/*        grid-template-columns: 0.2fr 3.5fr;*/
-/*    }*/
-/*    .content {padding-left: 105px;}*/
-/*}*/
